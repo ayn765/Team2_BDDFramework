@@ -46,23 +46,23 @@ public class BaseAPI {
 
     public DataReader dataReader;
     public Properties properties = new Properties();
-
-    String propertiesFilePath = "src/main/resources/secret.properties";
+    public static String pathFromUserDir = System.getProperty("user.dir");
+    public String propertiesFilePath = "src/main/resources/secret.properties";
 
 
 
 
 //    @Before
-    public static void setUp(String browserName, String url) {
-
-        driver = getLocalDriver(browserName);
-        driverWait = new WebDriverWait(driver, 10);
-        driver.get(url);
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
-
-        actions = new Actions(driver);
-    }
+//    public static void setUp(String browserName, String url) {
+//
+//        driver = getLocalDriver(browserName);
+//        driverWait = new WebDriverWait(driver, 10);
+//        driver.get(url);
+//        driver.manage().deleteAllCookies();
+//        driver.manage().window().maximize();
+//
+//        actions = new Actions(driver);
+//    }
 
 //    @After
 //    public static void tearDown() {
@@ -453,6 +453,18 @@ public class BaseAPI {
     /**
      * Assertion Helper Methods
      */
+    //Hover over each element in List<WebElement>, get attribute and store in Array<String>
+    public ArrayList<String> hoverOverHelpBoxAndGetAttributeValue(List<WebElement> elements, String attribute) {
+        ArrayList<String>allAttributes = new ArrayList<>();
+        waitUntilWebElementListVisible(elements);
+        for (WebElement singleElement : elements) {
+            hoverOverElement(singleElement);
+            String singleAttribute = singleElement.getAttribute(attribute);
+            allAttributes.add(singleAttribute);
+            System.out.println("\t***The attribute of the current element is: " + singleAttribute);
+        }
+        return allAttributes;
+    }
 
     //VERIFY VALID OR BROKEN LINKS:
     public boolean verifyLinks(List<WebElement> linkElements, String attribute) {

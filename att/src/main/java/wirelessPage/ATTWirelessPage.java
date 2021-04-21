@@ -66,7 +66,48 @@ public class ATTWirelessPage extends BaseAPI {
     @FindBy(xpath = WEB_ELEMENT_BUTTON_UPGRADE_DEVICE)
     public WebElement buttonUpgradeDevice;
 
-//    @FindBy(css = )
+    @FindBy(css = WEB_ELEMENT_INPUT_EMAIL)
+    public WebElement inputEmail;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_SIGN_UP)
+    public WebElement buttonSighUp;
+
+    @FindBy(css = WEB_ELEMENT_MESSAGE_EMAIL_CONFIRMATION)
+    public WebElement messageEmailConfirmation;
+
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
+//    public WebElement
+    //    @FindBy(css = )
 //    public WebElement
 
     public void signIn() {
@@ -86,5 +127,9 @@ public class ATTWirelessPage extends BaseAPI {
 
     public void doSignIn(){
         clickElement(buttonConfirmSignIn);
+    }
+
+    public void submitEmail(){
+
     }
 }

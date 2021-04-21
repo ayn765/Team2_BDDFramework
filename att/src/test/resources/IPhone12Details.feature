@@ -1,7 +1,8 @@
 Feature: user should be able to view details of iPhone 12 and have an option to add a line
   or upgrade account in order to purchase the phone
 
-  Background: Given user is on AT&T wireless page
+  Background:
+    Given user is on AT&T wireless page
 
   Scenario:
     When user clicks on iPhone 12 Max to navigate to details

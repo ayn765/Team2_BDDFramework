@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import wirelessPage.ATTWirelessPage;
 
+
 public class SignInDefinitions extends BaseAPI {
 
     ATTWirelessPage attWirelessPage = new ATTWirelessPage();
@@ -24,7 +25,7 @@ public class SignInDefinitions extends BaseAPI {
     @Given("user is on AT&T wireless page")
     public void user_is_on_the_main_page() {
 
-        driver.get("https://att.com/");
+        driver.get("https://att.com/wireless/");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
@@ -64,7 +65,7 @@ public class SignInDefinitions extends BaseAPI {
     @After
     public static void tearDown() {
         driver.close();
-        driver.quit();
+//        driver.quit();
     }
 
 }

@@ -20,7 +20,6 @@ public class IPhone12DetailsDefinitions extends BaseAPI {
         driver = getLocalDriver("chrome");
         driverWait = new WebDriverWait(driver, 10);
         actions = new Actions(driver);
-        implicitWait();
 
     }
 
@@ -65,10 +64,10 @@ public class IPhone12DetailsDefinitions extends BaseAPI {
         softAssert.assertAll();
 
     }
-
-    @After
-    public static void tearDown() {
-        driver.close();
-        driver.quit();
-    }
+//
+//    @After
+//    public static void tearDown() {
+//        driver.close();
+//        driver.quit();
+//    }
 }

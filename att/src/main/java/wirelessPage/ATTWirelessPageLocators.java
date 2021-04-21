@@ -21,6 +21,32 @@ public class ATTWirelessPageLocators {
     public static final String WEB_ELEMENT_BUTTON_CONTINUE_WITH_IPHONE12 = "button[data-qa='PDP-NextStepCTA-Button']";
     public static final String WEB_ELEMENT_BUTTON_ADD_LINE = "//button[contains(text(),'Add a line to my account')]";
     public static final String WEB_ELEMENT_BUTTON_UPGRADE_DEVICE = "//button[contains(text(),'Upgrade my device')]";
+    public static final String WEB_ELEMENT_INPUT_EMAIL = "input[type=email]";
+    public static final String WEB_ELEMENT_BUTTON_SIGN_UP = "a[title='Sign me up']";
+    public static final String WEB_ELEMENT_MESSAGE_EMAIL_CONFIRMATION = "div.color-functional-green.type-md.rel";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+//    public static final String WEB_ELEMENT_ = "";
+
+
 
 }
 
