@@ -1,11 +1,7 @@
 package step_definitions;
 
 import common.BaseAPI;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import wirelessPage.ATTWirelessPage;
 
@@ -14,14 +10,6 @@ public class IPhone12DetailsDefinitions extends BaseAPI {
 
     ATTWirelessPage attWirelessPage;
 
-    @Before
-    public void setUp() {
-
-        driver = getLocalDriver("chrome");
-        driverWait = new WebDriverWait(driver, 10);
-        actions = new Actions(driver);
-
-    }
 
     @When("user clicks on iPhone 12 Max to navigate to details")
     public void user_clicks_on_i_phone_12_max_to_navigate_to_details() {
@@ -64,10 +52,4 @@ public class IPhone12DetailsDefinitions extends BaseAPI {
         softAssert.assertAll();
 
     }
-//
-//    @After
-//    public static void tearDown() {
-//        driver.close();
-//        driver.quit();
-//    }
 }

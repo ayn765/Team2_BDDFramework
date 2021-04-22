@@ -4,6 +4,8 @@ import common.BaseAPI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,21 +41,26 @@ public class BMWFinancialServicesPage extends BaseAPI {
     @FindBy(css = WEB_ELEMENT_DROPDOWN_FUEL_TYPE)
     public WebElement dropdownFuelType;
 
-    @FindBy(xpath = WEB_ELEMENT_RESULT_DETAILED_SEARCH)
+    @FindBy(css = WEB_ELEMENT_RESULT_DETAILED_SEARCH)
     public WebElement resultDetailedSearch;
 
     @FindBy(css = WEB_ELEMENTS_HOVER_HELP_BOX)
     public List<WebElement> hoverHelpBoxes;
 
-//    @FindBy(css = )
-//    public WebElement
-//
-//    @FindBy(css = )
-//    public WebElement
+    @FindBy(css = WEB_ELEMENTS_SECTION_FREQUENTLY_ASKED_QUESTIONS)
+    public List<WebElement> frequentlyAskedQuestions;
+
+    @FindBy(css = WEB_ELEMENTS_BUTTONS_FREQUENTLY_ASKED_QUESTIONS)
+    public List<WebElement> buttonsFrequentlyAskedQuestions;
+
+    @FindBy(xpath = WEB_ELEMENTS_TEXT_ANSWERS)
+    public List<WebElement> textAnswers;
 
 
    static ArrayList<String> attributeValues = new ArrayList<>();
    static ArrayList<String> allHelpText = new ArrayList<>();
+   static ArrayList<String> frequentlyAskedQuestValues = new ArrayList<>();
+   static ArrayList<String> allAnswers = new ArrayList<>();
 
     public void navigateToSpecialOffers() {
         clickElement(linkSpecialOffers);
@@ -63,16 +70,16 @@ public class BMWFinancialServicesPage extends BaseAPI {
         sendKeysToElement(inputZipcode, string);
     }
 
-    public void selectTypeOfVehicleFromDropdown(int index) {
-        selectFromDropDownByIndex(dropdownVehicles, index);
+    public void selectTypeOfVehicleFromDropdown(String string) {
+        selectFromDropDownByVisibleText(dropdownVehicles, string);
     }
 
-    public void selectBodyTypeFromDropdown(String bodyType) {
-        selectFromDropDownByVisibleText(dropdownBodyStyle, bodyType);
+    public void selectBodyTypeFromDropdown(String string) {
+        selectFromDropDownByVisibleText(dropdownBodyStyle, string);
     }
 
-    public void selectModelYearFromDropDown(String modelYear) {
-        selectFromDropDownByValue(dropdownModelYear, modelYear);
+    public void selectModelYearFromDropDown(String string) {
+        selectFromDropDownByVisibleText(dropdownModelYear, string);
     }
 
     public void selectFuelTypeFromDropdown(int indexFuelType) {
@@ -95,7 +102,7 @@ public class BMWFinancialServicesPage extends BaseAPI {
     }
     public void hoverOverHelpBoxAndGetText(){
                 allHelpText.clear();
-                allHelpText = hoverOverHelpBoxAndGetAttributeValue(hoverHelpBoxes,"data-tippy-content");
+                allHelpText = hoverOverEachElementInListAndGetAttributeValue(hoverHelpBoxes,"data-tippy-content");
     }
 
     public boolean verifyHelpBoxesAreDisplayed() {
@@ -117,6 +124,36 @@ public class BMWFinancialServicesPage extends BaseAPI {
 
     public boolean verifyTextHelpBoxes() throws Exception {
         return compareListStringsToExcelDoc(allHelpText, pathFromUserDir + "/src/test/resources/BMWTestData.xlsx", "HelpBoxText");
+    }
+
+    public void clickAndGetFrequentlyAskedQuestionsAttributes(){
+        frequentlyAskedQuestValues.clear();
+        frequentlyAskedQuestValues = clickOnEachElementFromListAndGetAttributeValue(buttonsFrequentlyAskedQuestions,"aria-expanded");
+    }
+
+    public boolean verifyFrequentlyAskedQuestionsAreDisplayed(){
+        return verifyValueOfAttributesInStringArray(frequentlyAskedQuestValues, "true");
+    }
+    public void clickAndGetTextAnswers() throws InterruptedException {
+        ArrayList<String>allAttributes = new ArrayList<>();
+        waitUntilWebElementListVisible(buttonsFrequentlyAskedQuestions);
+        for(int i = 0; i<buttonsFrequentlyAskedQuestions.size(); i++){
+            buttonsFrequentlyAskedQuestions.get(i).click();
+            waitUntilWebElementVisible(buttonsFrequentlyAskedQuestions.get(i));
+            Thread.sleep(1000);
+            String singleAnswer = textAnswers.get(i).getText();
+            System.out.println("\t***The text of the element # " + (i+1) + " is: \n" + singleAnswer);
+            allAnswers.add(singleAnswer);
+        }
+
+    }
+        public boolean verifyTitlesOfFrequentlyAskedQuestions() throws Exception {
+        ArrayList<String> titles = clickOnEachElementFromListAndGetText(frequentlyAskedQuestions);
+        return compareListStringsToExcelDoc(titles, pathFromUserDir + "/src/test/resources/BMWTestData.xlsx", "QuestionsTitles");
+        }
+
+    public boolean verifyTextAnswers() throws Exception {
+        return compareListStringsToExcelDoc(allAnswers,pathFromUserDir + "/src/test/resources/BMWTestData.xlsx", "Answers");
     }
 
 }

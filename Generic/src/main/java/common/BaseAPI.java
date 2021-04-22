@@ -454,7 +454,7 @@ public class BaseAPI {
      * Assertion Helper Methods
      */
     //Hover over each element in List<WebElement>, get attribute and store in Array<String>
-    public ArrayList<String> hoverOverHelpBoxAndGetAttributeValue(List<WebElement> elements, String attribute) {
+    public ArrayList<String> hoverOverEachElementInListAndGetAttributeValue(List<WebElement> elements, String attribute) {
         ArrayList<String>allAttributes = new ArrayList<>();
         waitUntilWebElementListVisible(elements);
         for (WebElement singleElement : elements) {
@@ -464,6 +464,48 @@ public class BaseAPI {
             System.out.println("\t***The attribute of the current element is: " + singleAttribute);
         }
         return allAttributes;
+    }
+
+    //Click on each element in List<WebElement>, get attribute and store in Array<String>
+    public ArrayList<String> clickOnEachElementFromListAndGetAttributeValue(List<WebElement> elements, String attribute) {
+        ArrayList<String>allAttributes = new ArrayList<>();
+        waitUntilWebElementListVisible(elements);
+        for (WebElement singleElement : elements) {
+            clickElement(singleElement);
+            String singleAttribute = singleElement.getAttribute(attribute);
+            allAttributes.add(singleAttribute);
+            System.out.println("\t***The attribute of the current element is: " + singleAttribute);
+        }
+        return allAttributes;
+    }
+    //Click on each element in List<WebElement>, get text and store in Array<String>
+    public ArrayList<String> clickOnEachElementFromListAndGetText(List<WebElement> elements) {
+        ArrayList<String>allAttributes = new ArrayList<>();
+        waitUntilWebElementListVisible(elements);
+        for (WebElement singleElement : elements) {
+            clickElement(singleElement);
+            String singleAttribute = singleElement.getText();
+            allAttributes.add(singleAttribute);
+            System.out.println("\t***The text of the current element is: \n" + singleAttribute);
+        }
+        return allAttributes;
+    }
+
+    public boolean verifyValueOfAttributesInStringArray(ArrayList<String>arrayOfAttributes, String expectedValue) {
+        String expectedAttributeValue = expectedValue;
+        boolean flag = false;
+        int count = 0;
+        for (String singleAttributeValue : arrayOfAttributes) {
+            if (singleAttributeValue.equals(expectedAttributeValue)) {
+                flag = true;
+            }else{
+                flag = false;
+                count++;
+            }
+        }if(count>0){
+            flag = false;
+        }
+        return flag;
     }
 
     //VERIFY VALID OR BROKEN LINKS:
@@ -727,16 +769,6 @@ public class BaseAPI {
 
     }
 
-    public void waitUntilWebElementsArePresent() {
-        driverWait = new WebDriverWait(driver, 10);
-        try {
-            driverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("li.uitk-carousel-item>div>div>div>div>a")));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("ELEMENTS ARE NOT PRESENT");
-        }
-
-    }
 
     public void implicitWait() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

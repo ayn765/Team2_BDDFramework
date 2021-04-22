@@ -19,5 +19,5 @@ import org.junit.runner.RunWith;
 
 
 )
-public class BMWRunner {
+public class ATTRunner {
 }
