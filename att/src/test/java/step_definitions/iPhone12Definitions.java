@@ -6,7 +6,7 @@ import org.testng.asserts.SoftAssert;
 import wirelessPage.ATTWirelessPage;
 
 
-public class IPhone12DetailsDefinitions extends BaseAPI {
+public class iPhone12Definitions extends BaseAPI {
 
     ATTWirelessPage attWirelessPage;
 

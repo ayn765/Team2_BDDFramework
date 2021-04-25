@@ -26,9 +26,9 @@ public class SpecialOffersDefinitions extends BaseAPI {
     }
 
     @When("user enters {string} into the input field")
-    public void user_enters_zipcode_into_the_input_field(String string) {
+    public void user_enters_zipcode_into_the_input_field(String zipcode) {
         bmwFinancialServicesPage = new BMWFinancialServicesPage();
-        bmwFinancialServicesPage.enterZipcode(string);
+        bmwFinancialServicesPage.enterZipcode(zipcode);
 
     }
     @Then("user is able to view current offers in specified zipcode location")
@@ -39,29 +39,28 @@ public class SpecialOffersDefinitions extends BaseAPI {
     }
 
     @When("user selects {string} from the dropdown")
-    public void user_selects_type_of_the_vehicle_from_the_dropdown(String string) {
+    public void user_selects_type_of_the_vehicle_from_the_dropdown(String typeOfVehicle) {
         bmwFinancialServicesPage = new BMWFinancialServicesPage();
-        bmwFinancialServicesPage.selectTypeOfVehicleFromDropdown(string);
+        bmwFinancialServicesPage.selectTypeOfVehicleFromDropdown(typeOfVehicle);
     }
     @When("user picks {string} from the dropdown")
-    public void user_picks_body_style_from_the_dropdown(String string) {
+    public void user_picks_body_style_from_the_dropdown(String bodyStyle) {
         bmwFinancialServicesPage = new BMWFinancialServicesPage();
-        bmwFinancialServicesPage.selectBodyTypeFromDropdown(string);
+        bmwFinancialServicesPage.selectBodyTypeFromDropdown(bodyStyle);
     }
     @When("user chooses {string} from the dropdown")
-    public void user_chooses_model_year_from_the_dropdown(String string) {
+    public void user_chooses_model_year_from_the_dropdown(String modelYear) {
         bmwFinancialServicesPage = new BMWFinancialServicesPage();
-        bmwFinancialServicesPage.selectModelYearFromDropDown(string);
+        bmwFinancialServicesPage.selectModelYearFromDropDown(modelYear);
     }
     @When("user selects fuel type from the dropdown")
-    public void user_selects_fuel_type_from_the_dropdown() throws InterruptedException {
+    public void user_selects_fuel_type_from_the_dropdown() {
         bmwFinancialServicesPage = new BMWFinancialServicesPage();
         bmwFinancialServicesPage.selectFuelTypeFromDropdown(1);
     }
     @Then("search result populates {string}")
-    public void search_result_populates_correct_vehicle(String string) {
-        String expectedResult = string;
-        Assert.assertEquals(expectedResult, bmwFinancialServicesPage.resultDetailedSearch.getText());
+    public void search_result_populates_correct_vehicle(String correctVehicle) {
+        Assert.assertEquals(correctVehicle, bmwFinancialServicesPage.resultDetailedSearch.getText());
 
     }
 

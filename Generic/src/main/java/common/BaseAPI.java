@@ -137,6 +137,18 @@ public class BaseAPI {
 
     }
 
+    public void pressArrowDownKey() throws AWTException {
+        robot = new Robot();
+        try {
+            robot.keyPress(KeyEvent.VK_DOWN);
+            robot.keyRelease(KeyEvent.VK_DOWN);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("UNABLE TO PRESS ARROW KEY");
+        }
+
+    }
+
     public void pressEscapeKey() throws AWTException {
         robot = new Robot();
         try {
@@ -490,6 +502,15 @@ public class BaseAPI {
         }
         return allAttributes;
     }
+    //Get text from List<WebElement> and store in ArrayList<String>
+    public ArrayList<String> getTextFromListWebElement(List<WebElement> elements){
+        ArrayList<String>allText = new ArrayList<>();
+        for(WebElement header : elements){
+            String x = header.getText();
+            allText.add(x);
+        }
+        return allText;
+    }
 
     public boolean verifyValueOfAttributesInStringArray(ArrayList<String>arrayOfAttributes, String expectedValue) {
         String expectedAttributeValue = expectedValue;
@@ -549,32 +570,6 @@ public class BaseAPI {
         }
         return flag;
     }
-
-    //Get URLs from the List of WebElements, navigate to each URL to get titles and compare all titles to data from Excel doc
-    public boolean verifyLinksTitles(List<WebElement> linkElements, String attribute, String excelDocPath, String sheetName) throws IOException {
-        Iterator<WebElement> iterator = linkElements.iterator();
-        String url;
-        List<String> links = new ArrayList<>();
-        ArrayList<String> titles = new ArrayList<>();
-        while (iterator.hasNext()) {
-            url = iterator.next().getAttribute(attribute);
-            links.add(url);
-        }
-        for (String x : links) {
-            driver.navigate().to(x);
-            String pageTitle = driver.getTitle();
-            titles.add(pageTitle);
-        }
-
-        return compareListStringsToExcelDoc(titles, excelDocPath, sheetName);
-    }
-
-//    public String getStringFromTextFile(String path) {
-//        String string = "";
-//        textFileReader = new TextFileReader();
-//        string = textFileReader.readToString(path);
-//        return string;
-//    }
 
     public boolean compareListWebElementsToExcelDoc(List<WebElement> elements, String excelDocPath, String sheetName) throws IOException {
 
@@ -637,7 +632,27 @@ public class BaseAPI {
         return flag;
     }
 
-    //Get links and link's titles form List of WebElements and compare titles to data from Excel Doc
+    //Compare two ArrayList<String>
+    public boolean compareTwoArrayListsString(ArrayList<String> array1, ArrayList<String> array2) {
+        int count = 0;
+        boolean flag = false;
+        for (int i = 0; i < array1.size(); i++) {
+            if (array1.get(i).equals(array2.get(i))) {
+                System.out.println("Passed on: "+ array1.get(i));
+                flag = true;
+            } else {
+                flag = false;
+                System.out.println("Failed on: " + array1.get(i));
+                count++;
+            }
+        }
+        if(count>0){
+            flag = false;
+        }
+        return flag;
+    }
+
+    //Get links and link's titles form List of WebElements and compare titles to data from Excel Doc RETURN BOOLEAN
     public boolean getUrlsAndTitlesFromListWebElementAndCompareToExcelDoc(List<WebElement> elements, String attributeThatContainsUrl, String excelDocPath, String sheetName) throws IOException {
         Iterator<WebElement> iterator = elements.iterator();
         String url;
@@ -654,6 +669,23 @@ public class BaseAPI {
         }
         boolean flag = compareListStringsToExcelDoc(titles, excelDocPath, sheetName);
         return flag;
+    }
+    //Get links and link's titles form List of WebElements and store titles in ArrayList<String>
+    public ArrayList<String> getUrlsAndTitlesFromListWebElementAndStoreAsArrayListString(List<WebElement> elements, String attributeThatContainsUrl) {
+        Iterator<WebElement> iterator = elements.iterator();
+        String url;
+        ArrayList<String> links = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
+        while (iterator.hasNext()) {
+            url = iterator.next().getAttribute(attributeThatContainsUrl);
+            links.add(url);
+        }
+        for (String x : links) {
+            driver.navigate().to(x);
+            String pageTitle = driver.getTitle();
+            titles.add(pageTitle);
+        }
+        return titles;
     }
 
 

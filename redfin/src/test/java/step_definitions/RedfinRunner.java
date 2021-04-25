@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
         features = "src/test/resources/features/",
         glue = {"step_definitions"},
-        // to generate different type of reporting
+        /// to generate different type of reporting
         plugin = {"pretty"},
 
         monochrome = true,
@@ -19,5 +19,5 @@ import org.junit.runner.RunWith;
 
 
 )
-public class BMWRunner {
+public class RedfinRunner {
 }

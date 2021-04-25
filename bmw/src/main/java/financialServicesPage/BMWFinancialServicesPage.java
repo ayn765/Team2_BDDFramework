@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +69,8 @@ public class BMWFinancialServicesPage extends BaseAPI {
         sendKeysToElement(inputZipcode, string);
     }
 
-    public void selectTypeOfVehicleFromDropdown(String string) {
-        selectFromDropDownByVisibleText(dropdownVehicles, string);
+    public void selectTypeOfVehicleFromDropdown(String typeOfVehicle) {
+        selectFromDropDownByVisibleText(dropdownVehicles, typeOfVehicle);
     }
 
     public void selectBodyTypeFromDropdown(String string) {

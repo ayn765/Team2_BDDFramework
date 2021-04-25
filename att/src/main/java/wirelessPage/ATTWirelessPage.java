@@ -1,14 +1,16 @@
 package wirelessPage;
 
 import common.BaseAPI;
+import org.apache.commons.compress.archivers.zip.X000A_NTFS;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import static wirelessPage.ATTWirelessPageLocators.*;
 
 public class ATTWirelessPage extends BaseAPI {
 
-    public ATTWirelessPage(){
+    public ATTWirelessPage() {
         PageFactory.initElements(driver, this);
     }
 
@@ -75,22 +77,42 @@ public class ATTWirelessPage extends BaseAPI {
     @FindBy(css = WEB_ELEMENT_MESSAGE_EMAIL_CONFIRMATION)
     public WebElement messageEmailConfirmation;
 
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
-    //    @FindBy(css = )
-//    public WebElement
+    @FindBy(css = WEB_ELEMENT_IFRAME_SHOP_ACCESSORIES)
+    public WebElement iFrameShopAccessories;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_SHOP_ACCESSORIES)
+    public WebElement shopAllAccessories;
+
+    @FindBy(xpath = WEB_ELEMENT_HOVER_OVER_DETAILS_CHARGING_PAD)
+    public WebElement hoverOverDetailsChargingPad;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_WHITE_CHARGING_PAD)
+    public WebElement buttonWhiteChargingPad;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_BLACK_CHARGING_PAD)
+    public WebElement buttonBlackChargingPad;
+
+    @FindBy(css = WEB_ELEMENT_IMAGE_CHARGING_PAD)
+    public WebElement imageChargingPad;
+
+    @FindBy(css = WEB_ELEMENT_DROPDOWN_QUANTITY_CHARGING_PAD)
+    public WebElement dropdownQuantityChargingPad;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_ADD_TO_CART)
+    public WebElement buttonAddToCart;
+
+    @FindBy(css = WEB_ELEMENT_DROPDOWN_VIEW_VIDEO)
+    public WebElement dropdownViewVideo;
+
+    @FindBy(css = WEB_ELEMENT_BUTTON_PLAY_VIDEO)
+    public WebElement buttonPlayVideo;
+
+    @FindBy(css = WEB_ELEMENT_TIME_TRACKER_VIDEO)
+    public WebElement timeTrackerVideo;
+
+    @FindBy(css = WEB_ELEMENT_SLIDER_VIDEO)
+    public WebElement sliderVideo;
+
     //    @FindBy(css = )
 //    public WebElement
     //    @FindBy(css = )
@@ -111,25 +133,64 @@ public class ATTWirelessPage extends BaseAPI {
 //    public WebElement
 
     public void signIn() {
-    clickElement(buttonProfile);
-    clickElement(buttonSignIn);
+        clickElement(buttonProfile);
+        clickElement(buttonSignIn);
     }
 
-    public void enterUserID(String userID){
+    public void enterUserID(String userID) {
         implicitWait();
-        inputUserID.sendKeys("fjklsdf");
+        inputUserID.sendKeys(userID);
     }
 
-    public void enterPassword(String password){
+    public void enterPassword(String password) {
         waitUntilWebElementVisible(inputPassword);
-     sendKeysToElement(inputPassword, password);
+        sendKeysToElement(inputPassword, password);
     }
 
-    public void doSignIn(){
+    public void doSignIn() {
         clickElement(buttonConfirmSignIn);
     }
 
-    public void submitEmail(){
+    public void clickOnShopAllAccessories() throws InterruptedException {
 
+        implicitWait();
+        jsScrollIntoView(shopAllAccessories);
+        javaScriptExecutorClickOnElement(shopAllAccessories);
     }
+
+    public void hoverOverAndClickChargingPadDetails() {
+        clickElement(hoverOverDetailsChargingPad);
+    }
+
+    public void chooseWhiteColor() {
+        clickElement(buttonWhiteChargingPad);
+    }
+
+    public void chooseBlackColor() {
+        clickElement(buttonBlackChargingPad);
+    }
+    public void clickToViewVideo(){
+        clickElement(dropdownViewVideo);
+        playEmbeddedVideo(buttonPlayVideo);
+    }
+    public String getAttributePlayButton(){
+        String actualTitle;
+        return actualTitle = getAttributeFromElement(buttonPlayVideo, "title");
+    }
+
+    public void pauseVideo(){
+        clickElement(buttonPlayVideo);
+    }
+
+    int timeBeforeSkip;
+    int timeAfterSkip;
+    public void skipPartOfVideo(){
+        timeBeforeSkip = Integer.parseInt(getTextFromElement(timeTrackerVideo));
+        sliderBarAction(sliderVideo);
+        timeAfterSkip = Integer.parseInt(getTextFromElement(sliderVideo));
+    }
+    public boolean isVideoSkipped(){
+        return timeAfterSkip > timeBeforeSkip;
+    }
+
 }

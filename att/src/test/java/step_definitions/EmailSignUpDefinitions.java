@@ -5,7 +5,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import wirelessPage.ATTWirelessPage;
 
-public class EmailSignUpDefinition extends BaseAPI {
+public class EmailSignUpDefinitions extends BaseAPI {
 
     ATTWirelessPage attWirelessPage = new ATTWirelessPage();
 
@@ -13,13 +13,13 @@ public class EmailSignUpDefinition extends BaseAPI {
     @Given("user is on AT&T wireless page")
     public void user_is_on_the_main_page() {
 
-        driver.get("https://www.att.com/");
+        driver.get("https://www.att.com/wireless");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
 
     @When("user enters {string} into input field")
-    public void user_enters_into_input_field(String string) {
+    public void user_enters_email_into_input_field(String string) {
         attWirelessPage = new ATTWirelessPage();
         sendKeysToElement(attWirelessPage.inputEmail, string);
 
@@ -44,13 +44,13 @@ public class EmailSignUpDefinition extends BaseAPI {
     }
 
     @When("user enters {string}")
-    public void user_enters(String string) {
+    public void user_enters_userID(String string) {
         attWirelessPage = new ATTWirelessPage();
         attWirelessPage.enterUserID(string);
     }
 
     @When("user enters invalid {string}")
-    public void user_enters_invalid(String string) {
+    public void user_enters_invalid_password(String string) {
         attWirelessPage = new ATTWirelessPage();
         attWirelessPage.enterPassword(string);
     }

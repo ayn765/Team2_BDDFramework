@@ -14,7 +14,7 @@ public class CommonSteps extends BaseAPI {
         driver = getLocalDriver("chrome");
         driverWait = new WebDriverWait(driver, 10);
         actions = new Actions(driver);
-        driver.get("https://www.bmwusa.com/");
+        driver.get("https://www.redfin.com/");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 
@@ -22,7 +22,7 @@ public class CommonSteps extends BaseAPI {
 
     @After
     public static void tearDown() {
-//        driver.close();
-//        driver.quit();
+        driver.close();
+        driver.quit();
     }
 }

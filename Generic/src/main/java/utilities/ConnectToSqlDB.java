@@ -20,8 +20,7 @@ public class ConnectToSqlDB {
 
     public static Properties loadProperties() throws IOException {
         Properties prop = new Properties();
-        InputStream ism = new FileInputStream("C:/Users/sshei/IdeaProjects/AutomationFramework_Team3/Generic/src" +
-                "/main/resources/secret.properties");
+        InputStream ism = new FileInputStream("C:/Users/Erdosa/IdeaProjects/Team2_BDDFramework/Generic/src/main/resources/secret.properties");
         prop.load(ism);
         ism.close();
         return prop;
@@ -39,8 +38,8 @@ public class ConnectToSqlDB {
         return connect;
     }
 
-    public List<String> readDataBase(String tableName, String columnName) throws Exception {
-        List<String> data = new ArrayList<String>();
+    public ArrayList<String> readDataBase(String tableName, String columnName) throws Exception {
+        ArrayList<String> data = new ArrayList<String>();
 
         try {
             connectToSqlDatabase();
@@ -71,8 +70,8 @@ public class ConnectToSqlDB {
         }
     }
 
-    private List<String> getResultSetData(ResultSet resultSet2, String columnName) throws SQLException {
-        List<String> dataList = new ArrayList<String>();
+    private ArrayList<String> getResultSetData(ResultSet resultSet2, String columnName) throws SQLException {
+        ArrayList<String> dataList = new ArrayList<String>();
         while (resultSet.next()) {
             String itemName = resultSet.getString(columnName);
             dataList.add(itemName);
@@ -80,11 +79,11 @@ public class ConnectToSqlDB {
         return dataList;
     }
 
-    public void insertDataFromStringToSqlTable(String ArrayData, String tableName, String columnName) {
+    public void insertDataFromStringToSqlTable(String StringData, String tableName, String columnName) {
         try {
             connectToSqlDatabase();
             ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName + " ) VALUES(?)");
-            ps.setString(1, ArrayData);
+            ps.setString(1, StringData);
             ps.executeUpdate();
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,7 +117,7 @@ public class ConnectToSqlDB {
             ps = connect.prepareStatement("DROP TABLE IF EXISTS `"+tableName+"`;");
             ps.executeUpdate();
             ps = connect.prepareStatement("CREATE TABLE `"+tableName+"` (`ID` int(11) NOT NULL AUTO_INCREMENT,`SortingNumbers` bigint(20) DEFAULT NULL,  PRIMARY KEY (`ID`) );");
-            ps = connect.prepareStatement("CREATE TABLE `"+tableName+"` ("+columnName+" varchar (100) );");
+            ps = connect.prepareStatement("CREATE TABLE `"+tableName+"` ("+columnName+" varchar (500) );");
             ps.executeUpdate();
             for(WebElement e : elementList){
                 ps = connect.prepareStatement("INSERT INTO "+tableName+" ( "+columnName+" ) VALUES(?)");
