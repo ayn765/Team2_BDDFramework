@@ -52,7 +52,7 @@ public class BaseAPI {
 
 
 
-//    @Before
+    @Before
     public static void setUp(String browserName, String url) {
 
         driver = getLocalDriver(browserName);
