@@ -69,6 +69,7 @@ public class HomeGardenPage extends BaseAPI {
       for(int i = 0; i<color.size(); i++){
           color.get(i).click();
       }}
+
  public void selectBrand(String brandWare){
      ArrayList<String> allBrands= new ArrayList<>();
      waitUntilWebElementListVisible(brand);
@@ -76,12 +77,14 @@ public class HomeGardenPage extends BaseAPI {
          brand.get(i).click();
      }
       }
+
   public void inputMinPrice(int priceMin){
       sendKeysToElement(minPrice,String.valueOf(priceMin));
   }
   public void inputMaxPrice(int priceMax){
     sendKeysToElement(maxPrice,String.valueOf(priceMax));
   }
+
   public void selectTvBrand(String brandTv){
       ArrayList<String> allTvs= new ArrayList<>();
       waitUntilWebElementListVisible(tvsBrand);

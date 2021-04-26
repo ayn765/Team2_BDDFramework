@@ -54,13 +54,12 @@ public class TruliaBuyPage extends BaseAPI {
         Select sel=new Select(maxPrice);
         sel.deselectByValue(String.valueOf(priceMax));
     }
-    public List<String> selectHomeType(List<String> type){
+    public void selectHomeType(String type){
         ArrayList<String> allHomes= new ArrayList<>();
-        waitUntilWebElementListVisible(homeType);
-        for(int i = 0; i<allHomes.size(); i++){
+        for(int i = 0; i<homeType.size(); i++){
              homeType.get(i).click();
         }
-        return type;
+
     }
     public void nameOfAllNewListings(){
         String url="";

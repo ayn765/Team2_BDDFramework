@@ -49,7 +49,7 @@ public class BecomeHostStepDefinition extends BaseAPI{
         becomeHostPage=new BecomeHostPage();
         becomeHostPage.inputEmail(email);
     }
-    @When("user input\"{int}\" in phone box")
+    @When("user input {String} in phone box")
     public void user_input_in_phone_box(int phoneNumber) {
         becomeHostPage=new BecomeHostPage();
         becomeHostPage.phoneNumberToSend(phoneNumber);

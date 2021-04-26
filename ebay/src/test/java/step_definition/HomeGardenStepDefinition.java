@@ -65,13 +65,13 @@ public class HomeGardenStepDefinition extends BaseAPI {
         homeGardenPage=new HomeGardenPage();
         homeGardenPage.selectBrand(brand);
     }
-    @When("User inputs {string} in min price  box")
+    @When("User inputs {String} in min price  box")
     public void user_inputs_in_min_price_box(int minPrice) {
         homeGardenPage=new HomeGardenPage();
         homeGardenPage.inputMinPrice(minPrice);
     }
 
-    @When("user inputs {string} in max price box")
+    @When("user inputs {String} in max price box")
     public void user_inputs_in_max_price_box(int maxPrice) {
         homeGardenPage=new HomeGardenPage();
         homeGardenPage.inputMaxPrice(maxPrice);

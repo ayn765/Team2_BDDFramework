@@ -5,9 +5,9 @@ Feature: user should be able to receive notification email from Airbnb
     When  user clicks on become a host button
     Scenario Outline:
       When user input "<email>" in email box
-      And user input"<phoneNumber>" in phone box
-      And user clicks on check box
-      And user clicks on continue button
+      And  user input "<phoneNumber>" in phone box
+      And  user clicks on check box
+      And  user clicks on continue button
       Then a Thank you message displays
 
       Examples:

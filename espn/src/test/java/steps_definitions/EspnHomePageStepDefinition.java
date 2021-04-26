@@ -60,6 +60,7 @@ public class EspnHomePageStepDefinition extends BaseAPI{
         espnHomePage=new EspnHomePage();
         Assert.assertEquals(driver.getCurrentUrl(),expectedPage);
     }
+
   //AccountDropDown Features
 
     //Scenario 1
@@ -117,9 +118,9 @@ public class EspnHomePageStepDefinition extends BaseAPI{
         espnHomePage.switchToNewTab(1);
     }
     @When("user select {string} from the list of providers")
-    public void user_select_from_the_list_of_providers(String string) {
+    public void user_select_from_the_list_of_providers(String tvProvider) {
         espnHomePage=new EspnHomePage();
-        espnHomePage.selectFromListTv();
+        espnHomePage.selectFromListTv(tvProvider);
 
     }
     @Then("user should navigate to {string} page")

@@ -38,21 +38,21 @@ public class TruliaBuyStepDefinition extends BaseAPI {
     }
 
     @When("user select \"{int} in min price drop down")
-    public void user_select_in_min_price_drop_down(Integer minPrice) {
+    public void user_select_in_min_price_drop_down(int minPrice) {
         truliaBuyPage=new TruliaBuyPage();
         truliaBuyPage.selectMinPrice(minPrice);
     }
 
     @When("user select \"{int} in max price drop down")
-    public void user_select_in_max_price_drop_down(Integer maxPrice) {
+    public void user_select_in_max_price_drop_down(int maxPrice) {
         truliaBuyPage=new TruliaBuyPage();
         truliaBuyPage.selectMaxPrice(maxPrice);
     }
 
     @When("user select {string} in All home type dropdown")
-    public void user_select_in_all_home_type_dropdown(List<String> houseType) {
+    public void user_select_in_all_home_type_dropdown(String homeType) {
         truliaBuyPage=new TruliaBuyPage();
-        truliaBuyPage.selectHomeType(houseType);
+        truliaBuyPage.selectHomeType(homeType);
     }
     @Then("user should see Homes for sale available")
     public void user_should_homes_for_sale_available() {

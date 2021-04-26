@@ -51,8 +51,6 @@ public class EspnHomePage extends BaseAPI {
     public List <WebElement> listTvProvider;
 
 
-
-
     public void inputFname(String firstName){
         sendKeysToElement(fName,firstName);
     }
@@ -65,6 +63,7 @@ public class EspnHomePage extends BaseAPI {
     public void inputPassword(String userPassword){
         sendKeysToElement(password,userPassword);
     }
+
     public void suggestedTeamsList(String team){
        Actions action=new Actions(driver);
        action.moveToElement((WebElement) suggestedTeam).build().perform();
@@ -74,7 +73,7 @@ public class EspnHomePage extends BaseAPI {
             suggestedTeam.get(i).click();
         }
     }
-    public void selectFromListTv() {
+    public void selectFromListTv(String tvProvider) {
         ArrayList<String> allTvProvider = new ArrayList<>();
         waitUntilWebElementListVisible(listTvProvider);
         for (int i = 0; i < listTvProvider.size(); i++) {
