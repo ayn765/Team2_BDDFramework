@@ -1,33 +1,27 @@
 package common;
 
 import com.relevantcodes.extentreports.ExtentReports;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 //import org.apache.pdfbox.pdmodel.PDDocument;
 //import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import utilities.DataReader;
 import utilities.TextFileReader;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -206,18 +200,29 @@ public class BaseAPI {
         }
     }
 
-
     public void sendKeysToElement(WebElement element, String keysToSend) {
 
         try {
-            waitUntilWebElementVisible(element);
+            driverWait.until(ExpectedConditions.visibilityOf(element));
             element.sendKeys(keysToSend);
+            driverWait.until(ExpectedConditions.elementToBeClickable(element));
+            element.sendKeys(keysToSend);
+
+        } catch (StaleElementReferenceException staleElementReferenceException) {
+            staleElementReferenceException.printStackTrace();
+            System.out.println("ELEMENT IS STALE");
+
+        } catch (ElementNotVisibleException elementNotVisibleException) {
+            elementNotVisibleException.printStackTrace();
+            System.out.println("ELEMENT IS NOT VISIBLE IN THE DOM");
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("UNABLE TO SEND KEYS TO WEB ELEMENT");
         }
     }
+
+
 
     public void clickElement(WebElement elementToClick) {
 
@@ -730,4 +735,24 @@ public class BaseAPI {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
+    public void scrollToElementJScript(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        try {
+            js.executeScript("arguments[0].scrollIntoView();", element);
+        } catch (NoSuchElementException e) {
+            System.out.println("NO SUCH ELEMENT - " + element);
+            e.printStackTrace();
+        } catch (StaleElementReferenceException e) {
+            System.out.println("STALE ELEMENT - " + element);
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("COULD NOT SCROLL TO ELEMENT - " + element);
+            e.printStackTrace();
+        }
+    }
+    public String getCurrentPageUrl() {
+        String url = driver.getCurrentUrl();
+        return url;
+    }
 }
