@@ -547,6 +547,28 @@ public class BaseAPI {
 
     }
 
+
+    public WebElement waitForElementToBeClickable(WebElement element) {
+        try {
+            driverWait.until(ExpectedConditions.elementToBeClickable(element));
+
+        } catch (ElementNotInteractableException elementNotInteractableException) {
+            elementNotInteractableException.printStackTrace();
+            System.out.println("ELEMENT NOT INTERACTABLE");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("UNABLE TO LOCATE ELEMENT");
+        }
+        return element;
+    }
+
+    public void selectElement(WebElement elementToSelect) {
+
+        waitForElementToBeClickable(elementToSelect);
+        clickElement(elementToSelect);
+    }
+
     public boolean compareListStringsToExcelDoc(ArrayList<String> string, String excelDocPath, String sheetName) throws IOException {
 
         dataReader = new DataReader();
