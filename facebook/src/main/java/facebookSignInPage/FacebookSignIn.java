@@ -21,6 +21,9 @@ public class FacebookSignIn extends BaseAPI {
     @FindBy(xpath = WEB_ELEMENT_LOGIN_BUTTON)
     public WebElement LoginButton;
 
+    @FindBy(xpath = WEB_ELEMENT_FACEBOOK_MAIN_PAGE)
+    public WebElement FacebookMain;
+
     public void clickEmail(){
         clickElement(EmailButton);
     }
@@ -33,6 +36,9 @@ public class FacebookSignIn extends BaseAPI {
         clickElement(LoginButton);
     }
 
+    public String verifySuccessLoginMsg(){
+        return new BaseAPI().getTextFromElement(FacebookMain);
+    }
 
 
 }

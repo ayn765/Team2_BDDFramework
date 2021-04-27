@@ -9,7 +9,7 @@ Feature: Login to facebook
     Examples:
 
     |         email         |   password   |
-    |nbhchick808@hotmail.com| lemmeinahouse|
+    |cutychicka80@yahoo.com | abcd1234!    |
 
 
   Scenario Outline: Login with invalid credentials

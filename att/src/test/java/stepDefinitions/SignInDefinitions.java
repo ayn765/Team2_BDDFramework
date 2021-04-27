@@ -1,4 +1,4 @@
-package step_definitions;
+package stepDefinitions;
 
 import common.BaseAPI;
 import io.cucumber.java.*;
