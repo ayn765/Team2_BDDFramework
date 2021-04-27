@@ -7,6 +7,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 //import org.apache.pdfbox.pdmodel.PDDocument;
 //import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -52,7 +53,7 @@ public class BaseAPI {
 
 
 
-//    @Before
+    //    @Before
     public static void setUp(String browserName, String url) {
 
         driver = getLocalDriver(browserName);
@@ -306,7 +307,46 @@ public class BaseAPI {
             System.out.println("UNABLE TO SELECT AN ELEMENT");
         }
     }
+    /**
+     * Javascript Helper Methods
+     */
 
+    public static void clickJScript(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        try {
+            js.executeScript("arguments[0].click();", element);
+
+        } catch (NoSuchElementException e) {
+            System.out.println("NO SUCH ELEMENT - " + element);
+            e.printStackTrace();
+
+        } catch (StaleElementReferenceException e) {
+            System.out.println("STALE ELEMENT - " + element);
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            System.out.println("COULD NOT CLICK ON ELEMENT - " + element);
+            e.printStackTrace();
+        }
+    }
+
+    public void scrollToElementJScript(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        try {
+            js.executeScript("arguments[0].scrollIntoView();", element);
+        } catch (NoSuchElementException e) {
+            System.out.println("NO SUCH ELEMENT - " + element);
+            e.printStackTrace();
+        } catch (StaleElementReferenceException e) {
+            System.out.println("STALE ELEMENT - " + element);
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("COULD NOT SCROLL TO ELEMENT - " + element);
+            e.printStackTrace();
+        }
+    }
     public void selectFromDropDownByVisibleText(WebElement dropdown, String visibleText) {
         Select select = new Select(dropdown);
         try {

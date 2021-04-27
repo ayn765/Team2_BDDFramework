@@ -16,6 +16,7 @@
         <module>bmw</module>
         <module>cbssports</module>
         <module>chase</module>
+        <module>eBay</module>
         <module>espn</module>
         <module>expedia</module>
         <module>macys</module>
@@ -23,6 +24,7 @@
         <module>redfin</module>
         <module>trulia</module>
         <module>verizon</module>
+        <module>eBay</module>
     </modules>
 
     <properties>
